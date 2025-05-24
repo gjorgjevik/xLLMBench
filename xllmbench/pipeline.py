@@ -50,7 +50,7 @@ class Pipeline:
         fig.tight_layout()
         plt.savefig(file, dpi=150)
     
-    def run(self, experiment_config: dict):
+    def run(self, experiment_config: dict, visualize: bool):
         experiment_config = experiment_config
 
         directory = experiment_config['directory']
@@ -96,26 +96,28 @@ class Pipeline:
             models.append(key)
 
         self.write(os.path.join(directory, rank_output_file), results)
-        self.heatmap(
-            data=preference_flows,
-            xticklabels=[x.replace(' ', '\n') for x in ['positive preference flow', 'negative preference flow'],
-            yticklabels=models,
-            file=os.path.join(directory, rank_output_file.replace('.csv', '.pdf')),
-            figsize=(6, len(model_names)/4)
-        )
+        if visualize:
+            self.heatmap(
+                data=preference_flows,
+                xticklabels=[x.replace(' ', '\n') for x in ['positive preference flow', 'negative preference flow'],
+                yticklabels=models,
+                file=os.path.join(directory, rank_output_file.replace('.csv', '.pdf')),
+                figsize=(6, len(model_names)/4)
+            )
 
         matrix = [['model'] + keys]
         for key, l in zip(keys, preference_matrix.tolist()):
             matrix.append([key] + l)
 
         self.write(os.path.join(directory, rank_output_file.replace('rank.csv', 'preference-matrix.csv')), matrix)
-        self.heatmap(
-            data_raw=preference_matrix.tolist(),
-            xticklabels=models,
-            yticklabels=models,
-            file=os.path.join(directory, rank_output_file.replace('rank.csv', 'preference-matrix.pdf')),
-            figsize=(len(models)/2, len(models)/4)
-        )
+        if visualize:
+            self.heatmap(
+                data_raw=preference_matrix.tolist(),
+                xticklabels=models,
+                yticklabels=models,
+                file=os.path.join(directory, rank_output_file.replace('rank.csv', 'preference-matrix.pdf')),
+                figsize=(len(models)/2, len(models)/4)
+            )
 
 
 
@@ -142,5 +144,4 @@ if __name__ == '__main__':
         'rank_output_file': r'open-llm-s4-rank.csv'  # output file to be created
     }
 
-    Pipeline().run(config)
-  
+    Pipeline().run(config, False) 
