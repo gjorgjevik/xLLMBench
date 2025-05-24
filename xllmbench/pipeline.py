@@ -1,5 +1,8 @@
 import csv
 import os
+import numpy as np
+import seaborn as sns
+from matplotlib import pyplot as plt
 
 from xllmbench.ranking import PrometheeIIBasedRanking, PreferenceFunctionEnum
 
@@ -37,6 +40,16 @@ class Pipeline:
             for row in rows:
                 writer.writerow(row)
 
+    @staticmethod
+    def heatmap(file: str, data: np.ndarray, xticklabels: list, yticklabels: list, figsize: list):
+        fig, ax = plt.subplots(figsize=figsize)
+        sns.heatmap(data, annot=True, fmt='.2f', xticklabels=xticklabels, yticklabels=yticklabels,
+                    cbar_kws={'shrink': 0.4})
+        ax.tick_params(axis='x', rotation=90)
+
+        fig.tight_layout()
+        plt.savefig(file, dpi=150)
+    
     def run(self, experiment_config: dict):
         experiment_config = experiment_config
 
@@ -74,17 +87,35 @@ class Pipeline:
             preference_functions=preference_functions,
             user_specified_weights=user_specified_weights)
 
+        models = []
+        preference_flows = []
         results = [['model', 'predicted rank', 'predicted score', 'positive preference flow', 'negative preference flow']]
         for key in sorted(ranks, key=ranks.get):
             results.append([key, ranks[key], scores[key], positive_preference_flow[key], negative_preference_flow[key]])
+            preference_flows.append([positive_preference_flow[key], negative_preference_flow[key]])
+            models.append(key)
 
         self.write(os.path.join(directory, rank_output_file), results)
+        self.heatmap(
+            data=preference_flows,
+            xticklabels=[x.replace(' ', '\n') for x in ['positive preference flow', 'negative preference flow'],
+            yticklabels=models,
+            file=os.path.join(directory, rank_output_file.replace('.csv', '.pdf')),
+            figsize=(6, len(model_names)/4)
+        )
 
         matrix = [['model'] + keys]
         for key, l in zip(keys, preference_matrix.tolist()):
             matrix.append([key] + l)
 
         self.write(os.path.join(directory, rank_output_file.replace('rank.csv', 'preference-matrix.csv')), matrix)
+        self.heatmap(
+            data_raw=preference_matrix.tolist(),
+            xticklabels=models,
+            yticklabels=models,
+            file=os.path.join(directory, rank_output_file.replace('rank.csv', 'preference-matrix.pdf')),
+            figsize=(len(models)/2, len(models)/4)
+        )
 
 
 
