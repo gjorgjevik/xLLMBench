@@ -1,0 +1,256 @@
+{
+  "open_llm_s5.1_ahp_3": {
+        "scenario": "open_llm_s5.1",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL
+        ],
+        "user_specified_weights": [0.08333333, 0.08333333, 0.08333333, 0.25, 0.25, 0.25],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.1-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.1_ahp_5": {
+        "scenario": "open_llm_s5.1",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL
+        ],
+        "user_specified_weights": [0.05555556, 0.05555556, 0.05555556, 0.27777778, 0.27777778, 0.27777778],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.1-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.1_ahp_7": {
+        "scenario": "open_llm_s5.1",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL
+        ],
+        "user_specified_weights": [0.04166667, 0.04166667, 0.04166667, 0.29166667, 0.29166667, 0.29166667],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.1-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.1_ahp_9": {
+        "scenario": "open_llm_s5.1",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL,
+            PreferenceFunctionEnum.USUAL
+        ],
+        "user_specified_weights": [0.03333333, 0.03333333, 0.03333333, 0.3, 0.3, 0.3],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.1-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+
+    "open_llm_s5.2_ahp_3": {
+        "scenario": "open_llm_s5.2",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR
+        ],
+        "user_specified_weights": [0.08333333, 0.08333333, 0.08333333, 0.25, 0.25, 0.25],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.2-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.2_ahp_5": {
+        "scenario": "open_llm_s5.2",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR
+        ],
+        "user_specified_weights": [0.05555556, 0.05555556, 0.05555556, 0.27777778, 0.27777778, 0.27777778],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.2-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.2_ahp_7": {
+        "scenario": "open_llm_s5.2",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR
+        ],
+        "user_specified_weights": [0.04166667, 0.04166667, 0.04166667, 0.29166667, 0.29166667, 0.29166667],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.2-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.2_ahp_9": {
+        "scenario": "open_llm_s5.2",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR,
+            PreferenceFunctionEnum.LINEAR
+        ],
+        "user_specified_weights": [0.03333333, 0.03333333, 0.03333333, 0.3, 0.3, 0.3],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.2-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+
+    "open_llm_s5.3_ahp_3": {
+        "scenario": "open_llm_s5.3",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN
+        ],
+        "user_specified_weights": [0.08333333, 0.08333333, 0.08333333, 0.25, 0.25, 0.25],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.3-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.3_ahp_5": {
+        "scenario": "open_llm_s5.3",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN
+        ],
+        "user_specified_weights": [0.05555556, 0.05555556, 0.05555556, 0.27777778, 0.27777778, 0.27777778],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.3-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.3_ahp_7": {
+        "scenario": "open_llm_s5.3",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN
+        ],
+        "user_specified_weights": [0.04166667, 0.04166667, 0.04166667, 0.29166667, 0.29166667, 0.29166667],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.3-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    },
+  "open_llm_s5.3_ahp_9": {
+        "scenario": "open_llm_s5.3",
+        "directory": "\\path\\to\\input\\file",
+        "input_file": "input_file.csv",
+        "delimiter": ",",
+        "name_column": "Model",
+        "id_columns": ["#Params (B)", "Average"],
+        "metric_columns": ["IFEval", "BBH", "MATH Lvl 5", "GPQA", "MUSR", "MMLU-PRO"],
+        "preference_functions": [
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN,
+            PreferenceFunctionEnum.GAUSSIAN
+        ],
+        "user_specified_weights": [0.03333333, 0.03333333, 0.03333333, 0.3, 0.3, 0.3],
+        "column_maximization": [1, 1, 1, 1, 1, 1],
+        "rank_output_file": "open-llm-s5.3-rank.csv",
+        "preference_parameters": [0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    }
+}
