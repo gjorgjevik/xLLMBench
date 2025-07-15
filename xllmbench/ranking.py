@@ -1,6 +1,5 @@
-from enum import Enum
-
 import numpy as np
+from pymcdm.methods import TOPSIS, VIKOR
 
 from xllmbench.preference import PreferenceFunctionEnum
 
@@ -20,7 +19,7 @@ class PrometheeIIBasedRanking:
         return pairwise_distance_tensor * np.array(column_maximization).reshape([-1, 1, 1])
 
     @staticmethod
-    def apply_preference_functions(preference_functions: list,
+    def apply_preference_functions(preference_functions: list, preference_parameters: list,
                                    pairwise_distance_tensor: np.ndarray) -> np.ndarray:
         tensor = []
         for i in range(pairwise_distance_tensor.shape[0]):
@@ -29,9 +28,14 @@ class PrometheeIIBasedRanking:
             if preference_functions[i] == PreferenceFunctionEnum.USUAL:
                 parameters = []
             elif preference_functions[i] == PreferenceFunctionEnum.LINEAR:
-                parameters = [np.min(matrix), np.max(matrix)]
+                coefficient = preference_parameters[i]
+                min_value = np.min(matrix)
+                max_value = np.max(matrix)
+                parameters = [min_value + coefficient * abs(min_value), max_value - coefficient * abs(max_value)]
             elif preference_functions[i] == PreferenceFunctionEnum.GAUSSIAN:
-                parameters = [np.std(matrix)]
+                coefficient = preference_parameters[i]
+                s = np.std(matrix)
+                parameters = [s + coefficient * s]
 
             preference = np.apply_along_axis(
                 PreferenceFunctionEnum.get_function(preference_functions[i]),
@@ -89,21 +93,21 @@ class PrometheeIIBasedRanking:
 
     def run(self, keys: list, decision_matrix_raw: list,
             column_maximization: list, preference_functions: list,
-            user_specified_weights: list):
+            user_specified_weights: list, preference_parameters: list):
 
         # convert to nparray
         decision_matrix = np.array(decision_matrix_raw, ndmin=2)
         m, n = decision_matrix.shape
 
         # calculate pairwise differences for each column
-        pairwise_distance_tensor = self.pairwise_distance(decision_matrix)
+        pairwise_distance_tensor_before = self.pairwise_distance(decision_matrix)
 
         # minimize or maximize
-        pairwise_distance_tensor = self.min_max(pairwise_distance_tensor, column_maximization)
+        pairwise_distance_tensor_before = self.min_max(pairwise_distance_tensor_before, column_maximization)
 
         # apply user specified preference function to each column
         pairwise_distance_tensor = self.apply_preference_functions(
-            preference_functions, pairwise_distance_tensor)
+            preference_functions, preference_parameters, pairwise_distance_tensor_before)
 
         weights = np.array(user_specified_weights)
 
@@ -121,4 +125,87 @@ class PrometheeIIBasedRanking:
 
         [ranking, scoring, pos, neg] = self.rank(keys, net_flow, positive_preference_flow, negative_preference_flow)
 
-        return [preference_matrix, pos, neg, ranking, scoring]
+        return [pairwise_distance_tensor_before, pairwise_distance_tensor, preference_matrix, pos, neg, ranking, scoring]
+
+
+class TopsisBasedRanking:
+    @staticmethod
+    def rank(models: list, net_flow: np.ndarray) -> list:
+        previous_rank = 0
+        previous_score = np.inf
+
+        scoring = dict()
+        ranking = dict()
+
+        for score, model in sorted(zip(net_flow, models), reverse=True):
+            if score == previous_score:
+                current_rank = previous_rank
+            else:
+                current_rank = previous_rank + 1
+
+            scoring[model] = score
+            ranking[model] = current_rank
+
+            previous_rank = current_rank
+            previous_score = score
+
+        return [ranking, scoring]
+
+    def run(self, keys: list, decision_matrix_raw: list,
+            column_maximization: list, preference_functions: list,
+            user_specified_weights: list, preference_parameters: list):
+
+        # convert to nparray
+        decision_matrix = np.array(decision_matrix_raw, ndmin=2)
+
+        method = TOPSIS()
+
+        weights = np.array(user_specified_weights)
+        types = np.array(column_maximization)
+        scores = method(decision_matrix, weights, types)
+
+        [ranking, scoring] = self.rank(keys, scores)
+
+        return [ranking, scoring]
+
+
+class VikorBasedRanking:
+    @staticmethod
+    def rank(models: list, net_flow: np.ndarray) -> np.ndarray:
+        previous_rank = 0
+        previous_score = np.inf
+
+        scoring = dict()
+        ranking = dict()
+
+        for score, model in sorted(zip(net_flow, models), reverse=True):
+            if score == previous_score:
+                current_rank = previous_rank
+            else:
+                current_rank = previous_rank + 1
+
+            scoring[model] = score
+            ranking[model] = current_rank
+
+            previous_rank = current_rank
+            previous_score = score
+
+        return [ranking, scoring]
+
+    def run(self, keys: list, decision_matrix_raw: list,
+            column_maximization: list, preference_functions: list,
+            user_specified_weights: list, preference_parameters: list):
+
+        # convert to nparray
+        decision_matrix = np.array(decision_matrix_raw, ndmin=2)
+
+        method = VIKOR()
+
+        weights = np.array(user_specified_weights)
+        types = np.array(column_maximization)
+        scores = method(decision_matrix, weights, types)
+        scores = -1 * scores  # see pymcdm documentation for VIKOR method
+
+        [ranking, scoring] = self.rank(keys, scores)
+
+        return [ranking, scoring]
