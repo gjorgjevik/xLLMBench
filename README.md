@@ -37,6 +37,16 @@ To configure a custom experiment, specify the values of the parameters listed be
 - **`user_specified_weights`**: User-specified weight by criteria, in the same order as the criteria were specified in the list assigned to the **`metric_columns`** parameter
 - **`column_maximization`**: List indicating if the criterion is subjected to maximization or minimization. **`1`** for metric values maximization, **`-1`** for metric values minimization
 - **`rank_output_file`**: Name of the output file to be created with the ranking results
-- **`preference_parameters`**: Parameter coefficients used during sensitivity analysis. See the main article for details. Use value of **`0.0`** for default parameter values in each preference function.
+- **`preference_parameters`**: Preference function parameter coefficients used during sensitivity analysis. See the main article for details. Use value of **`0.0`** for default parameter values in each preference function.
 
-**`NOTE`**: We strongly recommend that custom experiments are defined by skilled data scientists that can translate application-specific requirements into custom experiment configurations, and estimate the effects of such configurations on the results both theoretically and empirically.
+**`IMPORTANT NOTE`**: We strongly recommend that custom experiments are defined by skilled data scientists that can translate application-specific requirements into custom experiment configurations, and estimate the effects of such configurations on the results both theoretically and empirically.
+
+## Defining Custom Preference Functions
+
+The framework allows for the addition of other preference functions and use in the experiment configuration, following the steps outlined below and the implementation of the three currently available preference functions available in **`preference.py`**.
+
+1. Define the new preference function in class **`PreferenceFunction`**, script **`preference.py`**.
+2. Register the new preference function in **`PreferenceFunctionEnum`**, script **`preference.py`**.
+3. Modify the method **`apply_preference_functions`** in script **`ranking.py`** by specifying the calculation of the default values of the function parameters (if any).
+
+**`IMPORTANT NOTE`**: We strongly emphasize that definition of custom preference functions should be done only by skilled data scientists, be based on solid theoretical grounding, and have their effects on the results evaluated through extensive experiments.
