@@ -12,3 +12,31 @@ This folder contains the core code and experiment configuration organised as fol
 - **`experiments_sensitivity_preference.txt`**: Contains experiment configurations used in the sensitivity analysis of the preference functions parameters, presented in the Appendices of the paper.
 - **`experiments_sensitivity_method.txt`**: Contains experiment configurations used in the sensitivity analysis comparing Promethee II to other Multi-Criteria Decision-Making (MCDM) methods, presented in the Appendices of the paper.
 - **`experiments_sensitivity_weights.txt`**: Contains experiment configurations used in the sensitivity analysis comparing manually defined criteria weights with weights calculated using the Analytic Hierarchy Process (AHP) MCDM method, presented in the Appendices of the paper.
+
+## Input Data Preparation Instructions
+
+1. The input data should be in CSV format, consisting of a selected portfolio of LLMs (each in a separate row) and (non-)performance criteria measurements (each in a separate column).
+2. Each criteria column should be uniquely named in the header row.
+3. Dedicate one column to the LLM names, the name of which will be assigned to the parameter 'name_column' in the experiment configuration.
+4. If additional metadata is needed to uniquely identify each LLM, specify it in separate column(s). Assign the names of those columns as a list to the parameter 'id_columns' in the experiment configuration. The values of those columns will be concatenated with the LLM name, to uniquely identify the LLM.
+5. The names of the columns containing the performance and non-performance criteria measurements should be provided as a list to the parameter 'metric_columns' in the experiment configuration.
+6. The dataset should be complete, without any missing values.
+
+## Defining Custom Experiment Configurations
+
+To configure a custom experiment, specify the values of the parameters listed below. For more examples, see the **`experiments.txt`** file.
+
+- **`scenario`**: Experiment name
+- **`directory`**: Path to input CSV file
+- **`input_file`**: Name of the input CSV file
+- **`delimiter`**: CSV file delimiter
+- **`name_column`**: Model name column
+- **`id_columns`**: List of additional columns to be used for unique identification of each LLM in combination with its name
+- **`metric_columns`**: List of criteria columns containing the measurement data
+- **`preference_functions`**: Preference functions by criteria, in the same order as the criteria were specified in the list assigned to the **`metric_columns`** parameter
+- **`user_specified_weights`**: User-specified weight by criteria, in the same order as the criteria were specified in the list assigned to the **`metric_columns`** parameter
+- **`column_maximization`**: List indicating if the criterion is subjected to maximization or minimization. **`1`** for metric values maximization, **`-1`** for metric values minimization
+- **`rank_output_file`**: Name of the output file to be created with the ranking results
+- **`preference_parameters`**: Parameter coefficients used during sensitivity analysis. See the main article for details. Use value of **`0.0`** for default parameter values in each preference function.
+
+**`NOTE`**: We strongly recommend that custom experiments are defined by skilled data scientists that can translate application-specific requirements into custom experiment configurations, and estimate the effects of such configurations on the results both theoretically and empirically.
