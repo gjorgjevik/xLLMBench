@@ -15,6 +15,8 @@ This folder contains the core code and experiment configuration organised as fol
 
 ## Input Data Preparation Instructions
 
+To prepare the input data for use with **`xllmbench`**, follow the steps outlined below.
+
 1. The input data should be in CSV format, consisting of a selected portfolio of LLMs (each in a separate row) and (non-)performance criteria measurements (each in a separate column).
 2. Each criteria column should be uniquely named in the header row.
 3. Dedicate one column to the LLM names, the name of which will be assigned to the parameter 'name_column' in the experiment configuration.
@@ -50,3 +52,13 @@ The framework allows for the addition of other preference functions and use in t
 3. Modify the method **`apply_preference_functions`** in script **`ranking.py`** by specifying the calculation of the default values of the function parameters (if any).
 
 **`IMPORTANT NOTE`**: We strongly emphasize that definition of custom preference functions should be done only by skilled data scientists, be based on solid theoretical grounding, and have their effects on the results evaluated through extensive experiments.
+
+## Analytic Hierarchy Process as Weighting Method
+
+In the main article, as part of the sensitivity analysis in **`Appendix D`**, Analytic Hierarchy Process (AHP) was used as a more user-friendly way to specify pairwise judgments on the importance of one criterion over another and calculate criteria weights. The importance is defined on a scale from **`1`** to **`9`**, as described in **`Appendix D`**.
+
+To calculate weights for **`m`** criteria, use the script **`weights.py`** and the steps outlined below. For example configuration used in **`Appendix D`**, see the file **`experiments_sensitivity_weights.txt`**.
+
+1. Specify pairwise judgments on the importance of one criterion over another in an **`m x m`** matrix. See the example in script **`weights.py`**.
+2. Calculate criteria weights.
+3. Assign the list of weights to parameter **`user_specified_weights`** in the experiment configuration and run the experiment. The order should be the same as the one specified in the parameter **`metric_columns`**.
