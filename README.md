@@ -8,6 +8,8 @@ This folder contains the core code and experiment configuration organised as fol
 - **`ranking.py`**: Implements the core functions of the Promethee II method, which is used for ranking.
 - **`preference.py`**: Implements the preference functions of the Promethee II method.
 - **`pipeline.py`**: Demonstrates the application of the Promethee method using an example experiment. Outputs two CSV files, (1) file with predicted rankings, predicted scores (net flows), positive preference flows, and negative preference flows, and (2) file with the preference matrix. The output files can be used to visualize the results. This script can be adapted to generate rankings for other scenarios by simply modifying the configuration settings.
+- **`correlation.py`**: Script used to calculate the Spearman rank correlation between different output ranking for one same input data file.
+- **`weights.py`**: Script used to calculate criteria weights with the Analytic Hierarchy Process method.
 - **`experiments.txt`**: Contains all default experiment configurations used in the main text of the accompanying paper.
 - **`experiments_sensitivity_preference.txt`**: Contains experiment configurations used in the sensitivity analysis of the preference functions parameters, presented in the Appendices of the paper.
 - **`experiments_sensitivity_method.txt`**: Contains experiment configurations used in the sensitivity analysis comparing Promethee II to other Multi-Criteria Decision-Making (MCDM) methods, presented in the Appendices of the paper.
@@ -62,3 +64,11 @@ To calculate weights for **`m`** criteria, use the script **`weights.py`** and t
 1. Specify pairwise judgments on the importance of one criterion over another in an **`m x m`** matrix. See the example in script **`weights.py`**.
 2. Calculate criteria weights.
 3. Assign the list of weights to parameter **`user_specified_weights`** in the experiment configuration and run the experiment. The order should be the same as the one specified in the parameter **`metric_columns`**.
+
+## Spearman Rank Correlation
+
+To calculate and visualize the Spearman rank correlation coefficients wetheen several different rankings of one same input data file, use the script **`correlation.py`** and the steps outlined below.
+
+1. Specify the directory in which the output JPG figure should be saved.
+2. In the dictionary, specify the names of the experiments to be used in the correlation calculation as keys and the path to the CSV files containing the output rankings from those experiment as values.
+3. Configure and run the script.
